@@ -102,7 +102,9 @@ class MainActivity : AppCompatActivity() {
 
     fun onOperator(view:View){
         tvInput?.text?.let {
-
+            if(tvInput?.text==""){
+                lastNumeric=true
+            }
             if (lastNumeric && !isOperatorAdded(it.toString())){
                 tvInput?.append((view as Button).text)
                 lastDot=false
@@ -114,7 +116,9 @@ class MainActivity : AppCompatActivity() {
     private fun isOperatorAdded(value:String):Boolean{
         return if(value.startsWith("-")){
             false
-        }else{
+        }else if(tvInput?.text==""){
+           return false
+        } else{
             value.contains("/")||
                     value.contains("*")||
                     value.contains("-")||
